@@ -33,3 +33,6 @@ config.guess
 config.sub
 configure
 depcomp
+Makefile
+config.log
+config.status
