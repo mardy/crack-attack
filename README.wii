@@ -1,0 +1,9 @@
+CONSOLE=wii
+
+source /etc/profile.d/devkit-env.sh
+export PKG_CONFIG_PATH=$($DEVKITPRO/portlibs_prefix.sh $CONSOLE)/lib/pkgconfig/
+CFLAGS="-I$DEVKITPRO/libogc/include -DNO_MULTITEXTURING" \
+        ./autogen.sh --host powerpc-eabi \
+            --enable-sound=yes \
+            --enable-gtk=no \
+            --datadir=/apps/
