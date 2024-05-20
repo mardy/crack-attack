@@ -34,13 +34,7 @@
 #include <sys/types.h>
 #include <cstring>
 
-#ifndef _WIN32
-#  include <sys/socket.h>
-#  include <sys/poll.h>
-#  include <netinet/in.h>
-#  include <netdb.h>
-#  include <arpa/inet.h>
-#else
+#ifdef _WIN32
 #  include <stdlib.h>
 #  include <winsock2.h>
 #  define sleep(x) Sleep(x)
