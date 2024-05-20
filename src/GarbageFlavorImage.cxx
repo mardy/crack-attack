@@ -203,6 +203,11 @@ void GarbageFlavorImage::buildOriginalGarbageTextureFileName (
  char file_name[256], int n )
 {
   buildGarbageTextureFileName(file_name, GC_DATA_DIRECTORY(""), n);
+  size_t len = strlen(file_name);
+  if (len > 4 && strcmp(file_name + len - 4, ".tga") == 0) {
+    /* Original files are stored as PNGs */
+    strcpy(file_name + len - 4, ".png");
+  }
 }
 
 void GarbageFlavorImage::requestGarbageFlavorImage_inline_split_ (
