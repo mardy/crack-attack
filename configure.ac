@@ -15,18 +15,9 @@ AC_PROG_INSTALL
 AC_PROG_RANLIB
 
 dnl Checks for libraries.
-AC_CHECK_LIB([GL], [glBegin])
-AC_CHECK_LIB([GLU], [gluLookAt])
-# I don't know how to check these.
-# FIXME: Replace `main' with a function in `-lX11':
-#AC_CHECK_LIB([X11], [main])
-# FIXME: Replace `main' with a function in `-lXi':
-#AC_CHECK_LIB([Xi], [main])
-AC_CHECK_LIB([glut], [glutInit])
-
-AC_CHECK_LIB(SDL_image, IMG_LoadPNG_RW, ,
-AC_MSG_ERROR([ *** Unable to find SDL_image library with PNG support
-(http://www.libsdl.org/projects/SDL_image/)]))
+PKG_PROG_PKG_CONFIG
+PKG_CHECK_MODULES([GL], [opengl glut])
+PKG_CHECK_MODULES([SDL_IMAGE], [SDL_image])
 
 dnl Checks for header files.
 AC_HEADER_STDC
@@ -61,8 +52,8 @@ if test "$enable_gtk" = "yes"; then
   PKG_CHECK_MODULES(PACKAGE, [$pkg_modules])
   AC_DEFINE([WANT_GTK], [], [Wants to compile gtk front-end])
 else
-  PACKAGE_CFLAGS=""
-  PACKAGE_LIBS=""
+  PACKAGE_CFLAGS="$GL_CFLAGS $SDL_IMAGE_CFLAGS"
+  PACKAGE_LIBS="$GL_LIBS $SDL_IMAGE_LIBS"
 fi
 AC_SUBST(PACKAGE_CFLAGS)
 AC_SUBST(PACKAGE_LIBS)
@@ -78,22 +69,17 @@ AUDIO_CFLAGS=""
 AUDIO_LIBS=""
 if test "$enable_sound" != "no"; then
   found_sound="no"
-  AM_PATH_SDL(1.2.0,
-    [
-      AC_CHECK_LIB([SDL_mixer],
-        [Mix_OpenAudio],
-        [found_sound=yes],
-        [found_sound=no]
-      )
-    ],[found_sound=no]
+  PKG_CHECK_MODULES(SDL_MIXER, [SDL_mixer],
+    [found_sound=yes],
+    [found_sound=no]
   )
 
   if test "$enable_sound" == "yes" -a "$found_sound" == "no"; then
     AC_MSG_ERROR(libSDL and SDL_mixer are required for sound)
   fi
   if test "$found_sound" == "yes"; then
-    AUDIO_CFLAGS="$SDL_CFLAGS"
-    AUDIO_LIBS="$SDL_LIBS -lSDL_mixer"
+    AUDIO_CFLAGS="$SDL_MIXER_CFLAGS"
+    AUDIO_LIBS="$SDL_MIXER_LIBS"
     AC_DEFINE(AUDIO_ENABLED, 1, [Has audio support])
   fi
 fi
