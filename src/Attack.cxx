@@ -162,7 +162,7 @@ void run_crack_attack (
 void parseCommandLine ( int argc, char **argv, int &mode, int &port,
  char *host_name, char *player_name , int &height, int &width )
 {
-  for (int n = 1; argv[n]; n++) {
+  for (int n = 1; n < argc; n++) {
 
     if (!strcmp(argv[n], "--nosound"))
       nosound = 1;
