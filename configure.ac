@@ -39,7 +39,7 @@ AC_CHECK_TYPE(socklen_t, [AC_DEFINE([HAS_SOCKLEN_T], [], [has socklen t])], ,
 
 
 dnl BinReloc source additions
-AM_BINRELOC
+dnl AM_BINRELOC
 AM_CONDITIONAL([WANT_BINRELOC], [test "$br_cv_binreloc" = "yes"])
 
 dnl Check for gtk
