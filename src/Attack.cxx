@@ -120,7 +120,7 @@ void run_crack_attack (
   }
 
   if (player_name[0] == '\0') {
-#ifndef _WIN32
+#ifdef HAVE_GETUID
     struct passwd *uinfo = getpwuid(getuid());
     if (uinfo) {
       strncpy(player_name, uinfo->pw_name, GC_PLAYER_NAME_LENGTH);

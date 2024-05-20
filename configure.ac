@@ -150,7 +150,7 @@ dnl Checks for library functions.
 AC_FUNC_FORK
 AC_FUNC_MEMCMP
 AC_FUNC_STAT
-AC_CHECK_FUNCS([atexit gethostbyname gethostbyname_r gethostbyaddr_r fcntl inet_ntoa mkdir pow socket sqrt strchr strcspn strstr poll])
+AC_CHECK_FUNCS([atexit gethostbyname gethostbyname_r gethostbyaddr_r fcntl inet_ntoa mkdir pow socket sqrt strchr strcspn strstr poll getuid])
 
 AC_CONFIG_FILES(
   Makefile
