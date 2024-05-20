@@ -36,6 +36,8 @@ int music_available = 0;
 int keep_playing   = 0;
 int current_track   = 0;
 
+using namespace std;
+
 vector<string> music_filelist;
 char *music_filename;
 string music_dirname;
