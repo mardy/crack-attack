@@ -221,16 +221,10 @@ void Displayer::cleanUp (   )
 
 void Displayer::reshape ( int width, int height )
 {
-  if (DC_WINDOW_PIXEL_WIDTH * height / DC_WINDOW_PIXEL_HEIGHT != width) {
-    height = (height + width) >> 1;
-    glutReshapeWindow(DC_WINDOW_PIXEL_WIDTH * height / DC_WINDOW_PIXEL_HEIGHT,
-     height);
-  } else {
-    glViewport(0, 0, width, height);
+  glViewport(0, 0, width, height);
 #ifdef DEVELOPMENT
-    screen_length = width;
+  screen_length = width;
 #endif
-  }
 }
 
 void Displayer::displayMeta (   )
