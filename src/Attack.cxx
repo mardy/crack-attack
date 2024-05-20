@@ -30,6 +30,10 @@
 #include <cctype>
 #include <sys/stat.h>
 
+#if defined(__WII__) || defined(__GAMECUBE__)
+#  include <fat.h>
+#endif
+
 #ifndef _WIN32
 #  include <pwd.h>
 #else
@@ -71,6 +75,13 @@ int nosound = 0;
 
 int main ( int argc, char **argv )
 {
+  int mode = 0;
+
+#if defined(__WII__) || defined(__GAMECUBE__)
+  setenv("HOME", "/apps/crack-attack", 1);
+  fatInitDefault();
+  mode = CM_SOLO;
+#endif
   setupLocalDataDirectory();
 #ifdef WANT_GTK
   if (argc <= 1) return gui_main(argc, argv);
@@ -78,7 +89,6 @@ int main ( int argc, char **argv )
   char player_name[GC_PLAYER_NAME_LENGTH];
   char host_name[GC_HOST_NAME_SIZE];
   int port;
-  int mode = 0;
   int height = -1, width = -1;
   
   player_name[0] = '\0';
