@@ -37,6 +37,7 @@ AC_CHECK_TYPE(socklen_t, [AC_DEFINE([HAS_SOCKLEN_T], [], [has socklen t])], ,
               #include <sys/socket.h>
 )
 
+AC_SUBST(EXEEXT, ".elf")
 
 dnl BinReloc source additions
 dnl AM_BINRELOC
