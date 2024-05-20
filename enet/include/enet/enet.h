@@ -14,6 +14,8 @@ extern "C"
 
 #ifdef WIN32
 #include "enet/win32.h"
+#elif defined(__WII__) || defined(__GAMECUBE__)
+#include "enet/ogc.h"
 #else
 #include "enet/unix.h"
 #endif
