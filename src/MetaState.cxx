@@ -65,6 +65,7 @@ void MetaState::programStart ( int _mode,
   glutSpecialFunc(Controller::specialMeta);
   glutKeyboardUpFunc(null);
   glutSpecialUpFunc(null);
+  glutJoystickFunc(Controller::joystickMeta, 10);
   glutEntryFunc(Controller::entry);
   glutDisplayFunc(Displayer::displayMeta);
   glutReshapeFunc(Displayer::reshape);
@@ -102,6 +103,7 @@ void MetaState::gameStart (   )
   glutSpecialFunc(Controller::specialPlay);
   glutKeyboardUpFunc(Controller::keyboardUpPlay);
   glutSpecialUpFunc(Controller::specialUpPlay);
+  glutJoystickFunc(Controller::joystickPlay, 10);
   glutDisplayFunc(Displayer::displayPlay);
   glutIdleFunc(Game::idlePlay);
 
@@ -151,6 +153,7 @@ void MetaState::gameFinish (   )
 
   glutKeyboardFunc(Controller::keyboardMeta);
   glutSpecialFunc(Controller::specialMeta);
+  glutJoystickFunc(Controller::joystickMeta, 10);
   glutDisplayFunc(Displayer::displayMeta);
   glutIdleFunc(Game::idleMeta);
 

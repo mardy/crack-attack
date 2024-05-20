@@ -41,6 +41,11 @@
 #include "Displayer.h"
 #endif
 
+#define JOY_BTN_SWAP 0x1
+#define JOY_BTN_ADVANCE 0x2
+#define JOY_BTN_PAUSE 0x4
+#define JOY_BTN_BACK 0x8
+#define JOY_BTN_QUIT 0x40
 
 int Controller::state;
 
@@ -162,6 +167,28 @@ void Controller::specialUpPlay ( int key, int x, int y )
   }
 }
 
+void Controller::joystickPlay ( unsigned int buttons, int x, int y, int z )
+{
+#ifdef __WII__
+  int tmp = x;
+  x = -y;
+  y = tmp;
+#endif
+
+  state = 0;
+  if (x < -10) state |= CC_LEFT;
+  if (x > 10) state |= CC_RIGHT;
+  if (y < -10) state |= CC_DOWN;
+  if (y > 10) state |= CC_UP;
+
+  if (buttons & JOY_BTN_SWAP) state |= CC_SWAP;
+  if (buttons & JOY_BTN_ADVANCE) state |= CC_ADVANCE;
+  if (buttons & JOY_BTN_PAUSE) state |= CC_PAUSE;
+  if (buttons & JOY_BTN_BACK) Game::concession();
+
+  ActionRecorder::addAction(state);
+}
+
 void Controller::keyboardMeta ( unsigned char key, int x, int y )
 {
 	switch (key) {
@@ -219,6 +246,21 @@ void Controller::specialUpMeta ( int key, int x, int y )
     state &= ~CC_DOWN;
     break;
   }
+}
+
+void Controller::joystickMeta ( unsigned int buttons, int x, int y, int z )
+{
+#ifdef __WII__
+  int tmp = x;
+  x = -y;
+  y = tmp;
+#endif
+
+  /* Allow any button to continue */
+  if (buttons & ~JOY_BTN_BACK) MetaState::localKeyPressed(false);
+
+  if (buttons & JOY_BTN_BACK) MetaState::localKeyPressed(true);
+  if (buttons & JOY_BTN_QUIT) exit(0);
 }
 
 void Controller::entry ( int mouse_state )

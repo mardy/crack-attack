@@ -41,10 +41,12 @@ public:
   static void keyboardUpPlay ( unsigned char key, int x, int y );
   static void specialPlay ( int key, int x, int y );
   static void specialUpPlay ( int key, int x, int y );
+  static void joystickPlay ( unsigned int buttons, int x, int y, int z );
   static void keyboardMeta ( unsigned char key, int x, int y );
   static void keyboardUpMeta ( unsigned char key, int x, int y );
   static void specialMeta ( int key, int x, int y );
   static void specialUpMeta ( int key, int x, int y );
+  static void joystickMeta ( unsigned int buttons, int x, int y, int z );
   static void entry ( int mouse_state );
 
   static inline int moveCommand (   )
