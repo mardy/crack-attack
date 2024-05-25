@@ -30,6 +30,7 @@
 #include <GL/glut.h>
 
 #include "glext.h"
+#include <cstring>
 #include <sstream>
 
 #include "Game.h"
