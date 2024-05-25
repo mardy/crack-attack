@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<app version="1">
+  <name>Crack Attack!</name>
+  <coder>Daniel Nelson, Alberto Mardegan</coder>
+  <version>1.1.14-0</version>
+  <release_date>20240525212132</release_date>
+  <short_description>Multiplayer puzzle game like "Tetris Attack"</short_description>
+  <long_description>Crack Attack is a puzzle game similar to the Super Nintendo game "Tetris Attack".  Slowly, your stack of colored blocks grows from the bottom, and you've got to make sure it never reaches the top. If it does, you lose. To eliminate blocks from the stack, line up at least three of one color, horizontally or vertically. Once you do, those blocks disappear, and put off slightly your inevitable demise.</long_description>
+</app>
