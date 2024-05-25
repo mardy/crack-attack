@@ -32,6 +32,7 @@
 
 #if defined(__WII__) || defined(__GAMECUBE__)
 #  include <fat.h>
+#  include <opengx.h>
 #endif
 
 #ifndef _WIN32
@@ -81,6 +82,10 @@ int main ( int argc, char **argv )
   setenv("HOME", "/apps/crack-attack", 1);
   fatInitDefault();
   mode = CM_SOLO;
+  ogx_register_tex_conversion(GL_LUMINANCE_ALPHA, GL_LUMINANCE_ALPHA,
+                              ogx_fast_conv_LA_IA8);
+  ogx_register_tex_conversion(GL_ALPHA, GL_ALPHA, ogx_fast_conv_Alpha_A8);
+  ogx_register_tex_conversion(GL_RGBA, GL_RGB, ogx_fast_conv_RGBA_RGB565);
 #endif
   setupLocalDataDirectory();
 #ifdef WANT_GTK
